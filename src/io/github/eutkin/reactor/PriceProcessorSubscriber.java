@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Flow;
 
+/**
+ * Simple {@link  java.util.concurrent.Flow.Subscriber} adapter for {@link PriceProcessor}.
+ */
 public class PriceProcessorSubscriber implements Flow.Subscriber<Map.Entry<String, Double>> {
 
     private final PriceProcessor priceProcessor;
@@ -19,7 +22,7 @@ public class PriceProcessorSubscriber implements Flow.Subscriber<Map.Entry<Strin
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
         this.subscription = subscription;
-        subscription.request(1);
+        this.subscription.request(1);
     }
 
     @Override
@@ -35,7 +38,6 @@ public class PriceProcessorSubscriber implements Flow.Subscriber<Map.Entry<Strin
 
     @Override
     public void onComplete() {
-        System.out.println("Done");
     }
 
     @Override
@@ -50,4 +52,5 @@ public class PriceProcessorSubscriber implements Flow.Subscriber<Map.Entry<Strin
     public int hashCode() {
         return Objects.hash(priceProcessor);
     }
+
 }
